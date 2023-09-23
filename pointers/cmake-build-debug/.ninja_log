@@ -1,0 +1,27 @@
+# ninja log v5
+1	500	7150382884253478	CMakeFiles/pointers.dir/main.cpp.obj	db5dbebb7901be28
+502	638	7150382885603729	pointers.exe	74d2d35c193ecc55
+5	385	7150383104137234	CMakeFiles/pointers.dir/main.cpp.obj	db5dbebb7901be28
+385	496	7150383105219471	pointers.exe	74d2d35c193ecc55
+3	390	7150384767868391	CMakeFiles/pointers.dir/main.cpp.obj	db5dbebb7901be28
+391	510	7150384769026665	pointers.exe	74d2d35c193ecc55
+3	343	7150385172121066	CMakeFiles/pointers.dir/main.cpp.obj	db5dbebb7901be28
+344	457	7150385173220645	pointers.exe	74d2d35c193ecc55
+3	365	7150387141143458	CMakeFiles/pointers.dir/main.cpp.obj	db5dbebb7901be28
+366	479	7150387142231916	pointers.exe	74d2d35c193ecc55
+3	355	7150387516670142	CMakeFiles/pointers.dir/main.cpp.obj	db5dbebb7901be28
+356	467	7150387517738001	pointers.exe	74d2d35c193ecc55
+3	383	7150388077611686	CMakeFiles/pointers.dir/main.cpp.obj	db5dbebb7901be28
+384	509	7150388078831872	pointers.exe	74d2d35c193ecc55
+3	353	7150388924147057	CMakeFiles/pointers.dir/main.cpp.obj	db5dbebb7901be28
+353	468	7150388925263024	pointers.exe	74d2d35c193ecc55
+4	374	7150389868150574	CMakeFiles/pointers.dir/main.cpp.obj	db5dbebb7901be28
+375	487	7150389869222784	pointers.exe	74d2d35c193ecc55
+4	359	7150390324844468	CMakeFiles/pointers.dir/main.cpp.obj	db5dbebb7901be28
+360	467	7150390325880847	pointers.exe	74d2d35c193ecc55
+4	365	7150391726685469	CMakeFiles/pointers.dir/main.cpp.obj	db5dbebb7901be28
+365	475	7150391727750596	pointers.exe	74d2d35c193ecc55
+4	359	7150392189403646	CMakeFiles/pointers.dir/main.cpp.obj	db5dbebb7901be28
+359	467	7150392190439070	pointers.exe	74d2d35c193ecc55
+3	361	7150401493176972	CMakeFiles/pointers.dir/main.cpp.obj	db5dbebb7901be28
+362	474	7150401494276636	pointers.exe	74d2d35c193ecc55

@@ -1,0 +1,3 @@
+C:/Users/apoorv/cpp-projects/pointers/cmake-build-debug/CMakeFiles/pointers.dir
+C:/Users/apoorv/cpp-projects/pointers/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/apoorv/cpp-projects/pointers/cmake-build-debug/CMakeFiles/rebuild_cache.dir
