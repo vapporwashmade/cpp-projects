@@ -23,6 +23,8 @@ TEST(test_matrix_basic) {
 
   Matrix_fill(mat, 0);
 
+  ostringstream o;
+
   int *ptr = Matrix_at(mat, 2, 3);
   ASSERT_EQUAL(Matrix_row(mat, ptr), 2);
   ASSERT_EQUAL(Matrix_column(mat, ptr), 3);
@@ -33,6 +35,7 @@ TEST(test_matrix_basic) {
   ASSERT_EQUAL(*cptr, 42);
 
   Matrix_fill_border(mat, 2);
+
   ASSERT_EQUAL(*Matrix_at(mat, 0, 0), 2);
 
   ASSERT_EQUAL(Matrix_max(mat), 42);
