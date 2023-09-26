@@ -86,16 +86,33 @@ TEST(max_fill) {
 
     // EDGE CASES FOR MIN VALUE FUNCTIONS ABOVE
     ASSERT_EQUAL(Matrix_column_of_min_value_in_row(mat, height - 1, width -
-    1, width), width - 1);
+                                                                    1, width),
+                 width - 1);
     ASSERT_EQUAL(Matrix_min_value_in_row(mat, height - 1, width - 1, width),
                  -1);
 
     ASSERT_EQUAL(Matrix_column_of_min_value_in_row(mat, height - 2, width -
-                                                                    2, width)
-                 , width - 1);
+                                                                    2, width),
+                 width - 1);
     ASSERT_EQUAL(Matrix_min_value_in_row(mat, height - 2, width -
-                                                          2, width)
-    , -1);
+                                                          2, width), -1);
+
+    delete mat;
+}
+
+TEST(test_smallest_possible) {
+    auto mat = new Matrix;
+    Matrix_init(mat, 1, 1);
+    Matrix_fill(mat, -2);
+
+    ASSERT_EQUAL(*Matrix_at(mat, 0, 0), -2);
+
+    Matrix_fill_border(mat, -3);
+
+    ASSERT_EQUAL(*Matrix_at(mat, 0, 0), -3);
+
+    ASSERT_EQUAL(Matrix_min_value_in_row(mat, 0, 0, 1), -3)
+    ASSERT_EQUAL(Matrix_column_of_min_value_in_row(mat, 0, 0, 1), 0)
 
     delete mat;
 }

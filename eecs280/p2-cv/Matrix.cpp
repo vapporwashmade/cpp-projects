@@ -20,7 +20,6 @@ void Matrix_init(Matrix *mat, int width, int height) {
 //           Each element is followed by a space and each row is followed
 //           by a newline. This means there will be an "extra" space at
 //           the end of each line.
-// TODO complete
 void Matrix_print(const Matrix *mat, std::ostream &os) {
     os << Matrix_width(mat) << ' ' << Matrix_height(mat) << '\n';
     for (int i = 0; i < Matrix_height(mat); ++i) {
@@ -75,7 +74,6 @@ int *Matrix_at(Matrix *mat, int row, int column) {
 //
 // EFFECTS:  Returns a pointer-to-const to the element in
 //           the Matrix at the given row and column.
-// TODO create a test to make sure what this function returns is a const
 const int *Matrix_at(const Matrix *mat, int row, int column) {
     return mat->data + (Matrix_width(mat) * row + column);
 }
