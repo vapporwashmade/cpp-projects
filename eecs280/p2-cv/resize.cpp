@@ -49,8 +49,6 @@ int main(int argc, char **argv) {
     return 0;
 }
 
-//TODO style checks
-//TODO submit to autograder
 static void error_print() {
     cout << "Usage: resize.exe IN_FILENAME OUT_FILENAME WIDTH [HEIGHT]\n"
          << "WIDTH and HEIGHT must be less than or equal to original" << endl;
