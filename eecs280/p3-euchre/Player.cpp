@@ -3,6 +3,7 @@
 //
 
 #include <cassert>
+#include <algorithm>
 #include "Player.hpp"
 
 class SimplePlayer : public Player {
@@ -69,20 +70,21 @@ public:
     // TODO test further (beware of private tests)
     // TODO test forgetting to remove card for both lead and play card
     Card lead_card(Suit trump) override {
-        int highest_nontrump_i = 0;
-        int highest_trump_i = 0;
+        int highest_nontrump_i = -1;
+        int highest_trump_i = -1;
         bool all_trump = true;
-        if (!hand[0].is_trump(trump)) {
-            all_trump = false;
-        }
-        for (int i = 1; i < hand.size(); ++i) {
+        for (int i = 0; i < hand.size(); ++i) {
             if (hand[i].is_trump(trump)) {
-                if (Card_less(hand[highest_trump_i], hand[i], trump)) {
+                if (highest_trump_i < 0) {
+                    highest_trump_i = i;
+                } else if (Card_less(hand[highest_trump_i], hand[i], trump)) {
                     highest_trump_i = i;
                 }
             } else {
-                all_trump = false;
-                if (hand[highest_nontrump_i] < hand[i]) {
+                if (highest_nontrump_i < 0) {
+                    all_trump = false;
+                    highest_nontrump_i = i;
+                } else if (hand[highest_nontrump_i] < hand[i]) {
                     highest_nontrump_i = i;
                 }
             }
@@ -92,20 +94,21 @@ public:
 
     // TODO test further (beware of private tests)
     Card play_card(const Card &led_card, Suit trump) override {
-        int highest_led_i = 0;
-        int lowest_card_i = 0;
+        int highest_led_i = -1;
+        int lowest_card_i = -1;
         bool has_led_suit = false;
-        if (hand[0].get_suit(trump) == led_card.get_suit(trump)) {
-            has_led_suit = true;
-        }
-        for (int i = 1; i < hand.size(); ++i) {
+        for (int i = 0; i < hand.size(); ++i) {
             if (hand[i].get_suit(trump) == led_card.get_suit(trump)) {
-                has_led_suit = true;
-                if (Card_less(hand[highest_led_i], hand[i], trump)) {
+                if (highest_led_i < 0) {
+                    has_led_suit = true;
+                    highest_led_i = i;
+                } else if (Card_less(hand[highest_led_i], hand[i], trump)) {
                     highest_led_i = i;
                 }
             } else {
-                if (Card_less(hand[i], hand[lowest_card_i], trump)) {
+                if (lowest_card_i < 0) {
+                    lowest_card_i = i;
+                } else if (Card_less(hand[i], hand[lowest_card_i], trump)) {
                     lowest_card_i = i;
                 }
             }
@@ -136,6 +139,7 @@ public:
 
     void add_card(const Card &c) override {
         hand.push_back(c);
+        std::sort(hand.begin(), hand.end());
     }
 
     bool make_trump(const Card &upcard, bool is_dealer, int round,
@@ -164,8 +168,8 @@ public:
         if (discard_i == -1) {
             return;
         }
-        add_card(upcard);
         hand.erase(hand.begin() + discard_i);
+        add_card(upcard);
     }
 
     // TODO test forgetting to remove card for both lead and play card

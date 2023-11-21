@@ -11,10 +11,7 @@ static void argerror();
 class Game {
 public:
     Game(std::istream &pack_stream, const std::string &shuffling, int points,
-         const std::string &name1, const std::string &type1,
-         const std::string &name2, const std::string &type2,
-         const std::string &name3, const std::string &type3,
-         const std::string &name4, const std::string &type4);
+         char **player_data);
 
     void play();
 
@@ -24,10 +21,9 @@ private:
 
     Card upcard;
     const bool do_shuffle;
-    const bool pts_to_win;
+    const int pts_to_win;
     int dealer = 0;
-    int team1pts = 0;
-    int team2pts = 0;
+    int pts[2]{0, 0};
 
     void shuffle();
 
@@ -75,13 +71,11 @@ int main(int argc, char **argv) {
         return 1;
     }
 
-    std::cout << argv[0] << ".exe ";
-    for (int i = 1; i < argc; ++i) {
+    for (int i = 0; i < argc; ++i) {
         std::cout << argv[i] << ' ';
     }
     std::cout << std::endl;
-    Game g = Game(pack, argv[2], pts, argv[4], argv[5], argv[6], argv[7],
-                  argv[8], argv[9], argv[10], argv[11]);
+    Game g = Game(pack, argv[2], pts, argv + 4);
 
     g.play();
     return 0;
@@ -94,26 +88,27 @@ static void argerror() {
 }
 
 Game::Game(std::istream &pack_stream, const std::string &shuffling, int points,
-           const std::string &name1, const std::string &type1,
-           const std::string &name2, const std::string &type2,
-           const std::string &name3, const std::string &type3,
-           const std::string &name4, const std::string &type4)
+           char **player_data)
         : do_shuffle(shuffling == "shuffle"), pts_to_win(points) {
     this->pack = Pack(pack_stream);
 
-    players.push_back(Player_factory(name1, type1));
-    players.push_back(Player_factory(name2, type2));
-    players.push_back(Player_factory(name3, type3));
-    players.push_back(Player_factory(name4, type4));
+    players.push_back(Player_factory(std::string(player_data[0]),
+                                     std::string(player_data[1])));
+    players.push_back(Player_factory(std::string(player_data[2]),
+                                     std::string(player_data[3])));
+    players.push_back(Player_factory(std::string(player_data[4]),
+                                     std::string(player_data[5])));
+    players.push_back(Player_factory(std::string(player_data[6]),
+                                     std::string(player_data[7])));
 }
 
 void Game::play() {
     int handcount = 0;
-    while (team1pts < pts_to_win && team2pts < pts_to_win) {
+    while (pts[0] < pts_to_win && pts[1] < pts_to_win) {
         hand(handcount);
         handcount++;
     }
-    if (team1pts >= pts_to_win) {
+    if (*pts >= pts_to_win) {
         std::cout << *players[0] << " and " << *players[2] << " win!\n";
     } else {
         std::cout << *players[1] << " and " << *players[3] << " win!\n";
@@ -145,10 +140,10 @@ void Game::hand(int hand) {
         }
     }
     // scoring
-    score(ou_team_tricks, team1pts, team2pts, ou_team);
-    std::cout << *players[0] << " and " << *players[2] << " have " << team1pts
+    score(ou_team_tricks, pts[ou_team], pts[1 - ou_team], ou_team);
+    std::cout << *players[0] << " and " << *players[2] << " have " << pts[0]
               << " points\n";
-    std::cout << *players[1] << " and " << *players[3] << " have " << team2pts
+    std::cout << *players[1] << " and " << *players[3] << " have " << pts[1]
               << " points\n";
     std::cout << '\n';
 
@@ -166,7 +161,7 @@ void Game::shuffle() {
 }
 
 void Game::deal() {
-    std::cout << *players[dealer] << " deals\n";
+    std::cout << *players[dealer % 4] << " deals\n";
     // first four batches
     for (int i = 0; i < 4; ++i) {
         for (int j = 0; j < 3 - (i % 2); ++j) {
@@ -189,8 +184,8 @@ int Game::make_trump(Suit &trump) {
     for (int i = 0; i < players.size(); ++i) {
         int curr = (dealer + i + 1) % 4;
         if (players[curr]->make_trump(upcard, i == 3, 1, trump)) {
-            players[dealer % 4]->add_and_discard(upcard);
             std::cout << *players[curr] << " orders up " << trump << '\n';
+            players[dealer % 4]->add_and_discard(upcard);
             return (curr) % 2;
         }
         std::cout << *players[curr] << " passes\n";

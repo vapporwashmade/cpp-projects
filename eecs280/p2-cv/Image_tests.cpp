@@ -1,11 +1,9 @@
-#include "Matrix.hpp"
 #include "Image_test_helpers.hpp"
 #include "unit_test_framework.hpp"
 #include <iostream>
 #include <string>
 #include <sstream>
 #include <fstream>
-#include <cassert>
 
 using namespace std;
 
@@ -47,6 +45,25 @@ TEST(test_print_basic) {
 // IMPLEMENT YOUR TEST FUNCTIONS HERE
 // You are encouraged to use any functions from Image_test_helpers.hpp as needed.
 
+TEST(test_get_set_pixel_fill) {
+    Image *img = new Image;
+
+    Image_init(img, 2, 2);
+
+    ASSERT_TRUE(Pixel_equal(Image_get_pixel(img, 1, 1), {0, 0, 0}))
+
+    Image_fill(img, {0, 255, 0});
+
+    ASSERT_TRUE(Pixel_equal(Image_get_pixel(img, 1, 1), {0, 255, 0}))
+
+    Image_set_pixel(img, 1, 1, {255, 0, 255});
+
+    ASSERT_TRUE(Pixel_equal(Image_get_pixel(img, 0, 1), {0, 255, 0}))
+    ASSERT_TRUE(Pixel_equal(Image_get_pixel(img, 1, 1), {255, 0, 255}))
+
+    delete img;
+}
+
 // Tests the Image_width and Image_height functions, along with Image_init
 // and Image_print
 TEST(test_init_print) {
@@ -73,25 +90,6 @@ TEST(test_init_print) {
     ASSERT_EQUAL(dogout.str(), dogoutcorrect)
 
     delete img;
-}
-
-TEST(test_get_set_pixel_fill) {
-    Image *image = new Image;
-
-    Image_init(image, 2, 2);
-
-    ASSERT_TRUE(Pixel_equal(Image_get_pixel(image, 1, 1), {0, 0, 0}))
-
-    Image_fill(image, {0, 255, 0});
-
-    ASSERT_TRUE(Pixel_equal(Image_get_pixel(image, 1, 1), {0, 255, 0}))
-
-    Image_set_pixel(image, 1, 1, {255, 0, 255});
-
-    ASSERT_TRUE(Pixel_equal(Image_get_pixel(image, 0, 1), {0, 255, 0}))
-    ASSERT_TRUE(Pixel_equal(Image_get_pixel(image, 1, 1), {255, 0, 255}))
-
-    delete image;
 }
 
 // NOTE: The unit test framework tutorial in Lab 2 originally

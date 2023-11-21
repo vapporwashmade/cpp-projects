@@ -88,6 +88,7 @@ static int squared_difference(Pixel p1, Pixel p2) {
 //           See the project spec for details on computing the energy matrix.
 void compute_energy_matrix(const Image *img, Matrix *energy) {
     Matrix_init(energy, Image_width(img), Image_height(img));
+    Matrix_fill(energy, 0);
     for (int i = 1; i < Image_height(img) - 1; ++i) {
         for (int j = 1; j < Image_width(img) - 1; ++j) {
             *Matrix_at(energy, i, j) =
@@ -111,6 +112,7 @@ void compute_energy_matrix(const Image *img, Matrix *energy) {
 //           See the project spec for details on computing the cost matrix.
 void compute_vertical_cost_matrix(const Matrix *energy, Matrix *cost) {
     Matrix_init(cost, Matrix_width(energy), Matrix_height(energy));
+    Matrix_fill(cost, 0);
     for (int i = 0; i < Matrix_width(energy); ++i) {
         *Matrix_at(cost, 0, i) = *Matrix_at(energy, 0, i);
     }
@@ -202,12 +204,6 @@ void remove_vertical_seam(Image *img, const int seam[]) {
             Image_set_pixel(small, i, j - 1, Image_get_pixel(img, i, j));
         }
     }
-
-//    for (int i = 0; i < Image_height(small); ++i) {
-//        for (int j = 0; j < Image_width(small); ++j) {
-//            Image_set_pixel(img, i, j, Image_get_pixel(small, i, j));
-//        }
-//    }
 
     *img = *small;
 

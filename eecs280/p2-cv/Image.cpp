@@ -13,6 +13,7 @@ void Image_init(Image *img, int width, int height) {
     Matrix_init(&img->red_channel, width, height);
     Matrix_init(&img->green_channel, width, height);
     Matrix_init(&img->blue_channel, width, height);
+    Image_fill(img, {0, 0, 0});
 }
 
 // REQUIRES: img points to an Image

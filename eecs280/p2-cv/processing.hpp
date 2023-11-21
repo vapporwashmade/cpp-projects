@@ -7,12 +7,12 @@
 // REQUIRES: img points to a valid Image
 // MODIFIES: *img
 // EFFECTS:  The image is rotated 90 degrees to the left (counterclockwise).
-void rotate_left(Image* img);
+void rotate_left(Image *img);
 
 // REQUIRES: img points to a valid Image.
 // MODIFIES: *img
 // EFFECTS:  The image is rotated 90 degrees to the right (clockwise).
-void rotate_right(Image* img);
+void rotate_right(Image *img);
 
 // REQUIRES: img points to a valid Image.
 //           energy points to a Matrix.
@@ -22,7 +22,7 @@ void rotate_right(Image* img);
 //           size as the given Image, and then the energy matrix for that
 //           image is computed and written into it.
 //           See the project spec for details on computing the energy matrix.
-void compute_energy_matrix(const Image* img, Matrix* energy);
+void compute_energy_matrix(const Image *img, Matrix *energy);
 
 // REQUIRES: energy points to a valid Matrix.
 //           cost points to a Matrix.
@@ -33,7 +33,7 @@ void compute_energy_matrix(const Image* img, Matrix* energy);
 //           size as the given energy Matrix, and then the cost matrix is
 //           computed and written into it.
 //           See the project spec for details on computing the cost matrix.
-void compute_vertical_cost_matrix(const Matrix* energy, Matrix *cost);
+void compute_vertical_cost_matrix(const Matrix *energy, Matrix *cost);
 
 // REQUIRES: cost points to a valid Matrix
 //           seam points to an array
@@ -48,7 +48,7 @@ void compute_vertical_cost_matrix(const Matrix* energy, Matrix *cost);
 //           tie for lowest cost, the leftmost one (i.e. with the lowest
 //           column number) is used.
 //           See the project spec for details on computing the minimal seam.
-void find_minimal_vertical_seam(const Matrix* cost, int seam[]);
+void find_minimal_vertical_seam(const Matrix *cost, int seam[]);
 
 // REQUIRES: img points to a valid Image
 //           Image_width(img) >= 2

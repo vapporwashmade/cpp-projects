@@ -12,7 +12,7 @@
 //           mat2 points to a valid Matrix
 // EFFECTS:  Returns true if mat1 and mat2 are the same size and
 //           contain exactly the same elements. Returns false otherwise.
-bool Matrix_equal(const Matrix* mat1, const Matrix* mat2);
+bool Matrix_equal(const Matrix *mat1, const Matrix *mat2);
 
 // REQUIRES: arr1 and arr2 point to arrays of length n
 // EFFECTS:  Returns true if the arrays pointed to by arr1 and arr2
